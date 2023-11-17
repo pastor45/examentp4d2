@@ -1,0 +1,28 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="exaamentp42.Site1" %>
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formularios ASP.NET</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form runat="server">
+        <div>
+            <nav>
+                <ul>
+                    <li><a href="FormularioRegistro.aspx">Registración</a></li>
+                    <li><a href="FormularioGestionArchivos.aspx">Gestión de Archivos</a></li>
+                </ul>
+            </nav>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <footer style="text-align: center; ">
+                <p>&copy; 2023 Realizado por Pablo Salamendi. Todos los derechos reservados.</p>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>
