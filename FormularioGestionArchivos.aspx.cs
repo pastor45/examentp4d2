@@ -28,7 +28,6 @@ namespace exaamentp42
                 string nombreArchivo = Path.GetFileName(fileUpload.FileName);
                 string rutaCarpetaUsuario = Server.MapPath(".") + "/" + nombreUsuario;
 
-                // Verificar si la carpeta del usuario existe, si no, crearla
                 if (!Directory.Exists(rutaCarpetaUsuario))
                 {
                     Directory.CreateDirectory(rutaCarpetaUsuario);
@@ -36,17 +35,14 @@ namespace exaamentp42
 
                 string rutaCompletaArchivo = Path.Combine(rutaCarpetaUsuario, nombreArchivo);
 
-                // Verificar si el archivo ya existe
                 if (File.Exists(rutaCompletaArchivo))
                 {
                     lblError.Text = "El archivo ya existe.";
                     return;
                 }
 
-                // Guardar el archivo en la carpeta del usuario
                 fileUpload.SaveAs(rutaCompletaArchivo);
 
-                // Recargar la lista de archivos en el GridView
                 CargarArchivos();
             }
             else
@@ -65,7 +61,6 @@ namespace exaamentp42
                 string rutaCarpetaUsuario = Server.MapPath(".") + "/" + Session["NombreUsuario"];
                 string rutaCompletaArchivo = Path.Combine(rutaCarpetaUsuario, nombreArchivo);
 
-                // Descargar el archivo
                 Response.ContentType = "application/octet-stream";
                 Response.AppendHeader("Content-Disposition", "attachment; filename=" + nombreArchivo);
                 Response.TransmitFile(rutaCompletaArchivo);
@@ -78,18 +73,15 @@ namespace exaamentp42
             string nombreUsuario = Session["NombreUsuario"] as string;
             string rutaCarpetaUsuario = Server.MapPath(".") + "/" + nombreUsuario;
 
-            // Verificar si la carpeta del usuario existe
             if (Directory.Exists(rutaCarpetaUsuario))
             {
                 string[] archivos = Directory.GetFiles(rutaCarpetaUsuario);
 
-                // Crear una lista de objetos para el GridView
                 var listaArchivos = archivos.Select(archivo => new
                 {
                     NombreArchivo = Path.GetFileName(archivo)
                 }).ToList();
 
-                // Enlazar la lista al GridView
                 GridViewArchivos.DataSource = listaArchivos;
                 GridViewArchivos.DataBind();
             }
